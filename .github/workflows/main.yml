@@ -1,0 +1,40 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: |
+        # Ваши команды для установки зависимостей
+        # Например:
+        # npm install
+        
+    - name: Build project
+      run: |
+        # Ваши команды для создания сборки проекта
+        # Например:
+        # npm run build
+
+    - name: Run unit tests
+      run: |
+        # Ваши команды для запуска юнит-тестов
+        # Например:
+        # npm run test
+
+    - name: Push changes
+      if: github.event_name == 'workflow_dispatch'
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git commit -am "CI: Manual run"
+        git push
